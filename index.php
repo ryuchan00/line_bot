@@ -1,48 +1,59 @@
+/*
+ * 環境変数として以下を使用しています
+ * - LINE_CHANNEL_ID
+ * - LINE_CHANNEL_SECRET
+ * - LINE_CHANNEL_MID
+ * - FIXIE_URL
+ * - APP_NAME
+ */
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
+error_log("START: PHP");
 
-use Symfony\Component\HttpFoundation\Request;
+$phpInput = json_decode(file_get_contents('php://input'));
+$to = $phpInput->{"result"}[0]->{"content"}->{"from"};
+$text = $phpInput->{"result"}[0]->{"content"}->{"text"};
 
-$app = new Silex\Application();
+$response_content = getResponseContent($text);
+$post_data = ["to" => [$to], "toChannel" => "1383378250", "eventType" => "138311608800106203", "content" => $response_content];
 
-$app->post('/callback', function (Request $request) use ($app) {
-    $client = new GuzzleHttp\Client();
+$ch = curl_init("https://trialbot-api.line.me/v1/events");
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, createHttpHeader());
+curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
+curl_setopt($ch, CURLOPT_PROXY, getenv("FIXIE_URL"));
+curl_setopt($ch, CURLOPT_PROXYPORT, 80);
+$result = curl_exec($ch);
+curl_close($ch);
 
-    $body = json_decode($request->getContent(), true);
-    foreach ($body['result'] as $msg) {
-        if (!preg_match('/(ぬるぽ|ヌルポ|ﾇﾙﾎﾟ|nullpo)/i', $msg['content']['text'])) {
-            continue;
-        }
+error_log(json_encode($result));
+error_log("END: PHP");
 
-        $resContent = $msg['content'];
-        $resContent['text'] = 'ｶﾞｯ';
+function createHttpHeader() {
+    $header = array(
+        'Content-Type: application/json; charset=UTF-8',
+        'X-Line-ChannelID: ' . getenv("LINE_CHANNEL_ID"),
+        'X-Line-ChannelSecret: ' . getenv("LINE_CHANNEL_SECRET"),
+        'X-Line-Trusted-User-With-ACL: ' . getenv("LINE_CHANNEL_MID")
+    );
+    return $header;
+}
 
-        $requestOptions = [
-            'body' => json_encode([
-                'to' => [$msg['content']['from']],
-                'toChannel' => 1383378250, # Fixed value
-                'eventType' => '138311608800106203', # Fixed value
-                'content' => $resContent,
-            ]),
-            'headers' => [
-                'Content-Type' => 'application/json; charset=UTF-8',
-                'X-Line-ChannelID' => getenv('LINE_CHANNEL_ID'),
-                'X-Line-ChannelSecret' => getenv('LINE_CHANNEL_SECRET'),
-                'X-Line-Trusted-User-With-ACL' => getenv('LINE_CHANNEL_MID'),
-            ],
-            'proxy' => [
-                'https' => getenv('FIXIE_URL'),
-            ],
-        ];
-
-        try {
-            $client->request('post', 'https://trialbot-api.line.me/v1/events', $requestOptions);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
+function getResponseContent($text) {
+    if ($text == "のばら") {
+        $imageUrl = "http://" . getenv("APP_NAME") . ".herokuapp.com/image/nobara.jpeg";
+        return createImageResponse($imageUrl, $imageUrl);
+    } else {
+        return createTextResponse("合言葉を言ってください");
     }
+}
 
-    return 'OK';
-});
+function createTextResponse($message) {
+    return ['contentType' => 1, "toType" => 1, "text" => $message];
+}
 
-$app->run();
+function createImageResponse($imageUrl, $thumbnailImageUrl) {
+    return ['contentType' => 2, "toType" => 1, 'originalContentUrl' => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
+}
