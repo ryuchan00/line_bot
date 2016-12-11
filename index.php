@@ -1,3 +1,4 @@
+<?php
 /*
  * 環境変数として以下を使用しています
  * - LINE_CHANNEL_ID
@@ -6,7 +7,7 @@
  * - FIXIE_URL
  * - APP_NAME
  */
-<?php
+
 error_log("START: PHP");
 
 $phpInput = json_decode(file_get_contents('php://input'));
