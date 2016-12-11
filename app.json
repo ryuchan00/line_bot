@@ -7,13 +7,13 @@
   "addons": ["fixie:tricycle"],
   "env": {
     "LINE_CHANNEL_ID": {
-      "description": "LINE Channel ID"
+      "description": "1491590368"
     },
     "LINE_CHANNEL_SECRET": {
-      "description": "LINE Channel Secret"
+      "description": "bd90207cac8fe73ccd182efc6101e2"
     },
     "LINE_CHANNEL_MID": {
-      "description": "LINE Channel MID"
+      "description": "IFLQS9ju5V6vhbvHerDs0+oH0l5/ueZoTVuXYgiXvbQaKTgEHab4YvUaOiD0R+yHqEVLWTXBuJaES9NYYC/uZY/gmSyf9xdyzNQ8ulJ/ovvKXvrNx2X2xtMZqRQ+GwcQHCxlR8pXxtYbx11VQ4/4VgdB04t89/1O/w1cDnyilFU="
     }
   }
 }
