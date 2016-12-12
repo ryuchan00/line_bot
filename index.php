@@ -44,8 +44,9 @@ curl_close($ch);
 function getResponseContent($text) {
     if ($text == "のばら") {
         // $imageUrl = "http://" . getenv("APP_NAME") . ".herokuapp.com/image/nobara.jpeg";
-        $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-        return createImageResponse($imageUrl, $imageUrl);
+        return createTextResponse("きさまはんらんぐんだな");
+        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+        // return createImageResponse($imageUrl, $imageUrl);
     } else {
         return createTextResponse("合言葉を言ってください");
         // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
