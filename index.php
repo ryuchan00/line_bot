@@ -1,10 +1,13 @@
 <?php
+error_log("callback start.");
 $accessToken = 'NcNXkgzBiEABNxdNOk9mGVv2IBL/04HevKtJfozIRYhxFE9OMFDrc8GYoLiDe++VIzUSIvpjNyE9RxKqqgOFjD4kTaR7EjrXK7g3B5vr7JFeFOmAusk7IdvNiLfPthizidIfbfEl0MT9fHxpIZHzfgdB04t89/1O/w1cDnyilFU=';
 
 
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
+
+error_log($json_string);
 
 $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 //メッセージ取得
@@ -40,6 +43,8 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     ));
 $result = curl_exec($ch);
 curl_close($ch);
+
+error_log("callback end.");
 
 function getResponseContent($text) {
     if ($text == "のばら") {
