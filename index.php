@@ -47,15 +47,24 @@ curl_close($ch);
 error_log("callback end.");
 
 function getResponseContent($text) {
-    if ($text == "のばら") {
-        // $imageUrl = "http://" . getenv("APP_NAME") . ".herokuapp.com/image/nobara.jpeg";
-        return createTextResponse("きさまはんらんぐんだな");
-        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-        // return createImageResponse($imageUrl, $imageUrl);
-    } else {
-        return createTextResponse("合言葉を言ってください");
-        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-        // return createImageResponse($imageUrl, $imageUrl);
+    // if ($text == "のばら") {
+    //     // $imageUrl = "http://" . getenv("APP_NAME") . ".herokuapp.com/image/nobara.jpeg";
+    //     return createTextResponse("きさまはんらんぐんだな");
+    //     // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+    //     // return createImageResponse($imageUrl, $imageUrl);
+    // } else {
+    //     return createTextResponse("合言葉を言ってください");
+    //     // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+    //     // return createImageResponse($imageUrl, $imageUrl);
+    // }
+    switch ($text) {
+        case 1;
+            return createTextResponse("きさまはんらんぐんだな");
+        default;
+            return createTextResponse(　<<< EOF
+宝石は、黄、赤、緑、黒、茶、白、青、ピンクの8色があり、好きな色を選べます。
+あなたなら、どの色の宝石でペンダントを完成させますか?
+EOF;);
     }
 }
 
