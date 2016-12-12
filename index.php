@@ -56,7 +56,7 @@ function createTextResponse($message) {
 }
 
 function createImageResponse($imageUrl, $thumbnailImageUrl) {
-    return ['type' => "image", 'originalContentUrl' => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
+    return ["type" => "image", "originalContentUrl" => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
 }
 
 /*
