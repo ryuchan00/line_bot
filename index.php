@@ -17,15 +17,17 @@ if($type != "text"){
 	exit;
 }
 
+$response_format_text = getResponseContent($text);
+
 //返信データ作成
-$response_format_text = [
-	"type" => "text",
-	"text" => "金剛デース！"
-	];
+// $response_format_text = [
+// 	"type" => "text",
+// 	"text" => "金剛デース！"
+// 	];
 $post_data = [
 	"replyToken" => $replyToken,
 	"messages" => [$response_format_text]
-	];
+];
 
 $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 curl_setopt($ch, CURLOPT_POST, true);
@@ -38,6 +40,23 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     ));
 $result = curl_exec($ch);
 curl_close($ch);
+
+function getResponseContent($text) {
+    if ($text == "のばら") {
+        $imageUrl = "http://" . getenv("APP_NAME") . ".herokuapp.com/image/nobara.jpeg";
+        return createImageResponse($imageUrl, $imageUrl);
+    } else {
+        return createTextResponse("合言葉を言ってください");
+    }
+}
+
+function createTextResponse($message) {
+    return ["type" => "text", "text" => $message];
+}
+
+function createImageResponse($imageUrl, $thumbnailImageUrl) {
+    return ['type' => "image", 'originalContentUrl' => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
+}
 
 /*
  * 環境変数として以下を使用しています
