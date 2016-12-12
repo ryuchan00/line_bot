@@ -47,9 +47,9 @@ function getResponseContent($text) {
         $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
         return createImageResponse($imageUrl, $imageUrl);
     } else {
-        // return createTextResponse("合言葉を言ってください");
-        $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-        return createImageResponse($imageUrl, $imageUrl);
+        return createTextResponse("合言葉を言ってください");
+        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+        // return createImageResponse($imageUrl, $imageUrl);
     }
 }
 
