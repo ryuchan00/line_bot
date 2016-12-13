@@ -32,7 +32,7 @@ $post_data = [
 	"messages" => [$response_format_text]
 ];
 
-error_log($post_data);
+error_log(json_encode($post_data));
 
 $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 curl_setopt($ch, CURLOPT_POST, true);
