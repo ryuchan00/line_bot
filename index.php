@@ -9,7 +9,7 @@ $accessToken = "NcNXkgzBiEABNxdNOk9mGVv2IBL/04HevKtJfozIRYhxFE9OMFDrc8GYoLiDe++V
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
 
-error_log($json_string);
+// error_log($json_string);
 
 $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
 //メッセージ取得¡
