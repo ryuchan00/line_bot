@@ -1,6 +1,6 @@
 <?php
 error_log("callback start.");
-$accessToken = 'NcNXkgzBiEABNxdNOk9mGVv2IBL/04HevKtJfozIRYhxFE9OMFDrc8GYoLiDe++VIzUSIvpjNyE9RxKqqgOFjD4kTaR7EjrXK7g3B5vr7JFeFOmAusk7IdvNiLfPthizidIfbfEl0MT9fHxpIZHzfgdB04t89/1O/w1cDnyilFU=';
+$accessToken = getenv("ACCESS_TOKEN");
 
 
 //ユーザーからのメッセージ取得
@@ -10,7 +10,7 @@ $jsonObj = json_decode($json_string);
 error_log($json_string);
 
 $type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
-//メッセージ取得
+//メッセージ取得¡
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
 //ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
@@ -22,11 +22,6 @@ if($type != "text"){
 
 $response_format_text = getResponseContent($text);
 
-//返信データ作成
-// $response_format_text = [
-// 	"type" => "text",
-// 	"text" => "金剛デース！"
-// 	];
 $post_data = [
 	"replyToken" => $replyToken,
 	"messages" => [$response_format_text]
@@ -56,8 +51,8 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-    //     // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-    //     // return createImageResponse($imageUrl, $imageUrl);
+        $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+        return createImageResponse($imageUrl, $imageUrl);
     // }
     $q =<<< EOF
     <<< 心理テスト >>>
