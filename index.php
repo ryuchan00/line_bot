@@ -1,6 +1,7 @@
 <?php
 error_log("callback start.");
-$accessToken = 'NcNXkgzBiEABNxdNOk9mGVv2IBL/04HevKtJfozIRYhxFE9OMFDrc8GYoLiDe++VIzUSIvpjNyE9RxKqqgOFjD4kTaR7EjrXK7g3B5vr7JFeFOmAusk7IdvNiLfPthizidIfbfEl0MT9fHxpIZHzfgdB04t89/1O/w1cDnyilFU=';
+// $accessToken = 'NcNXkgzBiEABNxdNOk9mGVv2IBL/04HevKtJfozIRYhxFE9OMFDrc8GYoLiDe++VIzUSIvpjNyE9RxKqqgOFjD4kTaR7EjrXK7g3B5vr7JFeFOmAusk7IdvNiLfPthizidIfbfEl0MT9fHxpIZHzfgdB04t89/1O/w1cDnyilFU=';
+$accessToken = getenv("ACCESS_TOKEN");
 
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
