@@ -51,8 +51,8 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-        // return createImageResponse($imageUrl, $imageUrl);
+        $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+        return createImageResponse($imageUrl, $imageUrl);
     // }
     $q =<<< EOF
     <<< 心理テスト >>>
@@ -143,7 +143,7 @@ function createTextResponse($message) {
 }
 
 function createImageResponse($imageUrl, $thumbnailImageUrl) {
-    return ["type" => "image", "originalContentUrl" => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
+    return ["type": "image", "originalContentUrl" => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
 }
 
 /*
