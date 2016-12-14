@@ -1,6 +1,8 @@
 <?php
 error_log("callback start.");
-$accessToken = getenv("ACCESS_TOKEN");
+// $accessToken = getenv("ACCESS_TOKEN");
+error_log(getenv("ACCESS_TOKEN"));
+$accessToken = "NcNXkgzBiEABNxdNOk9mGVv2IBL/04HevKtJfozIRYhxFE9OMFDrc8GYoLiDe++VIzUSIvpjNyE9RxKqqgOFjD4kTaR7EjrXK7g3B5vr7JFeFOmAusk7IdvNiLfPthizidIfbfEl0MT9fHxpIZHzfgdB04t89/1O/w1cDnyilFU="
 
 
 //ユーザーからのメッセージ取得
@@ -51,8 +53,8 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-        $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-        return createImageResponse($imageUrl, $imageUrl);
+        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+        // return createImageResponse($imageUrl, $imageUrl);
     // }
     $q =<<< EOF
     <<< 心理テスト >>>
