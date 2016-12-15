@@ -137,7 +137,7 @@ EOF;
     //         return createTextResponse($q);
     // }
     // return makeTemplatePostData($text);
-    return createTextResponse(json_encode(makeTemplatePostData($text)));
+    return createTextResponse(makeTemplatePostData($text));
 }
 
 function createTextResponse($message) {
