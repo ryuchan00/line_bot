@@ -51,8 +51,8 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-        $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
-        return createImageResponse($imageUrl, $imageUrl);
+        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+        // return createImageResponse($imageUrl, $imageUrl);
     // }
     $q =<<< EOF
     <<< 心理テスト >>>
@@ -108,34 +108,35 @@ EOF;
 あなたの落ち込みの原因は、「喜び」とそれを失う「恐れ」にあるでしょう。
 EOF;
 
-    switch ($text) {
-        case "黄";
-        case "黄色";
-            return createTextResponse($a["yellow"]);
-        case "赤";
-        case "赤色";
-            return createTextResponse($a["red"]);
-        case "緑";
-        case "緑色";
-            return createTextResponse($a["green"]);
-        case "黒";
-        case "黒色";
-            return createTextResponse($a["black"]);
-        case "茶";
-        case "茶色";
-            return createTextResponse($a["brawn"]);
-        case "白";
-        case "白色";
-            return createTextResponse($a["white"]);
-        case "青";
-        case "青色";
-            return createTextResponse($a["blue"]);
-        case "ピンク";
-        case "ピンク色";
-            return createTextResponse($a["pink"]);
-        default;
-            return createTextResponse($q);
-    }
+    // switch ($text) {
+    //     case "黄";
+    //     case "黄色";
+    //         return createTextResponse($a["yellow"]);
+    //     case "赤";
+    //     case "赤色";
+    //         return createTextResponse($a["red"]);
+    //     case "緑";
+    //     case "緑色";
+    //         return createTextResponse($a["green"]);
+    //     case "黒";
+    //     case "黒色";
+    //         return createTextResponse($a["black"]);
+    //     case "茶";
+    //     case "茶色";
+    //         return createTextResponse($a["brawn"]);
+    //     case "白";
+    //     case "白色";
+    //         return createTextResponse($a["white"]);
+    //     case "青";
+    //     case "青色";
+    //         return createTextResponse($a["blue"]);
+    //     case "ピンク";
+    //     case "ピンク色";
+    //         return createTextResponse($a["pink"]);
+    //     default;
+    //         return createTextResponse($q);
+    // }
+    return makeTemplatePostData($text);
 }
 
 function createTextResponse($message) {
@@ -144,6 +145,39 @@ function createTextResponse($message) {
 
 function createImageResponse($imageUrl, $thumbnailImageUrl) {
     return ["type" => "image", "originalContentUrl" => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
+}
+
+function makeTemplatePostData($length) {
+    return [
+        "type" => "template",
+        "altText" => "どの言葉にしますか？",
+        "template" => [
+            "type" => "buttons",
+            "title" => "Menu",
+            "texy" => "作る文字列の種類を選んでください",
+            "action" => makeButtonTemplateDate($length)
+        ]
+    ];
+}
+
+function makeButtonTemplateData($length) {
+    return [
+        [
+            "type" => "postback",
+            "label" => "半角英数",
+            "data" => "lang=half&length=" . $length
+        ],
+        [
+            "type" => "postback",
+            "label" => "全角日本語",
+            "data" => "lang=half&length=" . $length
+        ],
+        [
+            "type" => "postback",
+            "label" => "半角記号",
+            "data" => "lang=half&length=" . $length
+        ]
+    ];
 }
 
 /*
