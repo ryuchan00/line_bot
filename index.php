@@ -155,7 +155,7 @@ function makeTemplatePostData($length) {
             "type" => "buttons",
             "title" => "Menu",
             "text" => "作る文字列の種類を選んでください",
-            "action" => makeButtonTemplateDate($length)
+            "action" => makeButtonTemplateData($length)
         ]
     ];
 }
