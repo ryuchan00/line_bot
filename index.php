@@ -155,6 +155,8 @@ function makeImagePostData($imagePath) {
         "originalContentUrl" => $imagePath,
         "previewImageUrl" => $imagePath
     ];
+
+    return $response_format_text;
 }
 
 function makeTemplatePostData($length) {
