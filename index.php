@@ -52,7 +52,8 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-         $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
+        //  $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
+         $imagePath = "./image/test.jpg";
         // return createImageResponse($imageUrl, $imageUrl);
     // }
     return makeImagePostData($imagePath);
