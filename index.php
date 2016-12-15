@@ -136,7 +136,7 @@ EOF;
     //     default;
     //         return createTextResponse($q);
     // }
-    return makeTemplatePostData($text);
+    return makeTemplatePostData(1);
 }
 
 function createTextResponse($message) {
@@ -154,7 +154,7 @@ function makeTemplatePostData($length) {
         "template" => [
             "type" => "buttons",
             "title" => "Menu",
-            "texy" => "作る文字列の種類を選んでください",
+            "text" => "作る文字列の種類を選んでください",
             "action" => makeButtonTemplateDate($length)
         ]
     ];
