@@ -108,34 +108,34 @@ EOF;
 あなたの落ち込みの原因は、「喜び」とそれを失う「恐れ」にあるでしょう。
 EOF;
 
-    // switch ($text) {
-    //     case "黄";
-    //     case "黄色";
-    //         return createTextResponse($a["yellow"]);
-    //     case "赤";
-    //     case "赤色";
-    //         return createTextResponse($a["red"]);
-    //     case "緑";
-    //     case "緑色";
-    //         return createTextResponse($a["green"]);
-    //     case "黒";
-    //     case "黒色";
-    //         return createTextResponse($a["black"]);
-    //     case "茶";
-    //     case "茶色";
-    //         return createTextResponse($a["brawn"]);
-    //     case "白";
-    //     case "白色";
-    //         return createTextResponse($a["white"]);
-    //     case "青";
-    //     case "青色";
-    //         return createTextResponse($a["blue"]);
-    //     case "ピンク";
-    //     case "ピンク色";
-    //         return createTextResponse($a["pink"]);
-    //     default;
-    //         return createTextResponse($q);
-    // }
+    switch ($text) {
+        case "黄";
+        case "黄色";
+            return createTextResponse($a["yellow"]);
+        case "赤";
+        case "赤色";
+            return createTextResponse($a["red"]);
+        case "緑";
+        case "緑色";
+            return createTextResponse($a["green"]);
+        case "黒";
+        case "黒色";
+            return createTextResponse($a["black"]);
+        case "茶";
+        case "茶色";
+            return createTextResponse($a["brawn"]);
+        case "白";
+        case "白色";
+            return createTextResponse($a["white"]);
+        case "青";
+        case "青色";
+            return createTextResponse($a["blue"]);
+        case "ピンク";
+        case "ピンク色";
+            return createTextResponse($a["pink"]);
+        default;
+            return createTextResponse($q);
+    }
     return makeTemplatePostData(1);
 }
 
@@ -161,7 +161,8 @@ function makeTemplatePostData($length) {
 }
 
 function makeButtonTemplateData($length) {
-    return [
+    return
+    [
         [
             "type" => "postback",
             "label" => "半角英数",
