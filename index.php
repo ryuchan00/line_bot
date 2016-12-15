@@ -51,9 +51,10 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-        // $imageUrl = "http://linebot1234.herokuapp.com/image/test.jpg";
+         $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
         // return createImageResponse($imageUrl, $imageUrl);
     // }
+    return makeImagePostData($imagePath);
     $q =<<< EOF
     <<< 心理テスト >>>
 宝石は、黄、赤、緑、黒、茶、白、青、ピンクの8色があり、好きな色を選べます。
@@ -137,7 +138,7 @@ EOF;
     //         return createTextResponse($q);
     // }
     // return makeTemplatePostData($text);
-    return createTextResponse(makeTemplatePostData($text));
+    // return createTextResponse(makeTemplatePostData($text));
 }
 
 function createTextResponse($message) {
@@ -146,6 +147,14 @@ function createTextResponse($message) {
 
 function createImageResponse($imageUrl, $thumbnailImageUrl) {
     return ["type" => "image", "originalContentUrl" => $imageUrl, "previewImageUrl" => $thumbnailImageUrl];
+}
+
+function makeImagePostData($imagePath) {
+    $response_format_text = [
+        "type" => "image",
+        "originalContentUrl" => $imagePath,
+        "previewImageUrl" => $imagePath
+    ];
 }
 
 function makeTemplatePostData($length) {
