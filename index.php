@@ -5,7 +5,7 @@ $accessToken = getenv("ACCESS_TOKEN");
 
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
-$jsonObj = json_decode($json_string);
+$jsonObj = json_decode($json_string, JSON_PRETTY_PRINT);
 
 error_log($json_string);
 
@@ -20,8 +20,9 @@ if($type != "text"){
 	exit;
 }
 
-$response_format_text = getResponseContent($text);
+// $response_format_text = getResponseContent($text);
 $response_format_text = createTextResponse($text);
+$response_format_text += createTextResponse($text);
 
 $post_data = [
 	"replyToken" => $replyToken,
@@ -34,7 +35,7 @@ $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data, JSON_PRETTY_PRINT));
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Content-Type: application/json; charser=UTF-8',
     'Authorization: Bearer ' . $accessToken
@@ -52,8 +53,7 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-        //  $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
-         $imagePath = "./image/test.jpg";
+        $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
         // return createImageResponse($imageUrl, $imageUrl);
     // }
     return makeImagePostData($imagePath);
@@ -193,6 +193,14 @@ function makeButtonTemplateData($length) {
             "data" => "lang=half&length=" . $length
         ]
     ];
+}
+
+{
+    "type": "location",
+    "title": "my location",
+    "address": "〒150-0002 東京都渋谷区渋谷２丁目２１−１",
+    "latitude": 35.65910807942215,
+    "longitude": 139.70372892916203
 }
 
 /*
