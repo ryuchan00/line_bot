@@ -55,7 +55,7 @@ function getResponseContent($text) {
     //     return createTextResponse("合言葉を言ってください");
         // $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
         $imagePath = "/app/image/test.jpg";
-        return createImageResponse($imageUrl, $imageUrl);
+        return createImageResponse($imagePath, $imagePath);
     // }
     $q =<<< EOF
     <<< 心理テスト >>>
