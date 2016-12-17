@@ -54,7 +54,7 @@ function getResponseContent($text) {
     // } else {
     //     return createTextResponse("合言葉を言ってください");
         // $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
-        $imagePath = "/app/image/test.jpg";
+        $imagePath = "https://upload.wikimedia.org/wikipedia/commons/1/1a/Image_upload_test.jpg";
         return createImageResponse($imagePath, $imagePath);
     // }
     $q =<<< EOF
