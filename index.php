@@ -22,15 +22,14 @@ if($type != "text"){
 
 // $response_format_text = getResponseContent($text);
 $response_format_text = createTextResponse($text);
-$response_format_text += createTextResponse($text);
-error_log(print_r($response_format_text,true),"3","./log/debug.log");
+// $response_format_text += createTextResponse($text);
 
 $post_data = [
 	"replyToken" => $replyToken,
 	"messages" => [$response_format_text]
 ];
 
-error_log(json_encode($post_data));
+error_log(json_encode($post_data, JSON_PRETTY_PRINT));
 
 $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 curl_setopt($ch, CURLOPT_POST, true);
@@ -54,10 +53,10 @@ function getResponseContent($text) {
     //     // return createImageResponse($imageUrl, $imageUrl);
     // } else {
     //     return createTextResponse("合言葉を言ってください");
-        $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
-        // return createImageResponse($imageUrl, $imageUrl);
+        // $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
+        $imagePath = "/app/image/test.jpg";
+        return createImageResponse($imageUrl, $imageUrl);
     // }
-    return makeImagePostData($imagePath);
     $q =<<< EOF
     <<< 心理テスト >>>
 宝石は、黄、赤、緑、黒、茶、白、青、ピンクの8色があり、好きな色を選べます。
