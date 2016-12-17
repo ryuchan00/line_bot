@@ -20,8 +20,8 @@ if($type != "text"){
 	exit;
 }
 
-// $response_format_text = getResponseContent($text);
-$response_format_text = createTextResponse($text);
+$response_format_text = getResponseContent($text);
+// $response_format_text = createTextResponse($text);
 // $response_format_text += createTextResponse($text);
 
 $post_data = [
