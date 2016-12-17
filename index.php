@@ -23,6 +23,7 @@ if($type != "text"){
 // $response_format_text = getResponseContent($text);
 $response_format_text = createTextResponse($text);
 $response_format_text += createTextResponse($text);
+error_log(print_r($response_format_text,true),"3","./log/debug.log");
 
 $post_data = [
 	"replyToken" => $replyToken,
