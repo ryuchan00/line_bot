@@ -5,7 +5,7 @@ $accessToken = getenv("ACCESS_TOKEN");
 
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
-$jsonObj = json_decode($json_string, JSON_PRETTY_PRINT);
+$jsonObj = json_decode($json_string);
 
 error_log($json_string);
 
@@ -35,7 +35,7 @@ $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data, JSON_PRETTY_PRINT));
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Content-Type: application/json; charser=UTF-8',
     'Authorization: Bearer ' . $accessToken
