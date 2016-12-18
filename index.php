@@ -198,17 +198,17 @@ function makeButtonsPostData($imagePath) {
                 [
                     "type" => "postback",
                     "label" => "1",
-                    "data" => "action=1&itemid=1"
+                    "text" => "1"
                 ],
                 [
                     "type" => "postback",
                     "label" => "2",
-                    "data" => "action=2&itemid=2"
+                    "text" => "2"
                 ],
                 [
                     "type" => "postback",
                     "label" => "3",
-                    "data" => "action=3&itemid=3"
+                    "text" => "3"
                 ],
                 [
                     "type" => "postback",
