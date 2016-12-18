@@ -169,16 +169,16 @@ function makeConfirmPostData() {
         "template" => [
             "type" => "congirm",
             "text" => "アンケートに回答しますか？",
-            "action" => [
+            "actions" => [
                 [
                     "type" => "message",
                     "label" => "Yes",
-                    "data" => "yes"
+                    "text" => "yes"
                 ],
                 [
                     "type" => "message",
                     "label" => "No",
-                    "data" => "no"
+                    "text" => "no"
                 ]
             ]
         ]
