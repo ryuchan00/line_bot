@@ -167,7 +167,7 @@ function makeConfirmPostData() {
         "type" => "template",
         "altText" => "アンケートに回答しますか？",
         "template" => [
-            "type" => "congirm",
+            "type" => "confirm",
             "text" => "アンケートに回答しますか？",
             "actions" => [
                 [
