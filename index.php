@@ -19,6 +19,13 @@ $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 if($type != "text"){
 	exit;
 }
+switch ($type) {
+    case "text";
+    case "join";
+        error_log($json_string);
+    default;
+        exit;
+}
 
 $response_format_text = getResponseContent($text);
 // $response_format_text = createTextResponse($text);
