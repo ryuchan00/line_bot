@@ -56,7 +56,7 @@ function getResponseContent($text) {
         // $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
         $imagePath = "https://upload.wikimedia.org/wikipedia/commons/1/1a/Image_upload_test.jpg";
         // return createImageResponse($imagePath, $imagePath);
-        return makeButtonsPostData();
+        return makeButtonsPostData($imagePath);
     // }
     $q =<<< EOF
     <<< 心理テスト >>>
@@ -185,7 +185,7 @@ function makeConfirmPostData() {
     ];
 }
 
-function makeButtonsPostData() {
+function makeButtonsPostData($imagePath) {
     return [
         "type" => "template",
         "altText" => "this is a buttons template",
