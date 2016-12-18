@@ -56,7 +56,7 @@ function getResponseContent($text) {
         // $imagePath = "http://linebot1234.herokuapp.com/image/test.jpg";
         $imagePath = "https://upload.wikimedia.org/wikipedia/commons/1/1a/Image_upload_test.jpg";
         // return createImageResponse($imagePath, $imagePath);
-        return makeTemplatePostData(10);
+        return makeConfirmPostData();
     // }
     $q =<<< EOF
     <<< 心理テスト >>>
@@ -162,6 +162,29 @@ function makeImagePostData($imagePath) {
     return $response_format_text;
 }
 
+function makeConfirmPostData() {
+    return [
+        "type" => "template",
+        "altText" => "アンケートに回答しますか？",
+        "template" => [
+            "type" => "congirm",
+            "text" => "アンケートに回答しますか？",
+            "action" => [
+                [
+                    "type" => "message",
+                    "label" => "Yes",
+                    "data" => "yes"
+                ],
+                [
+                    "type" => "message",
+                    "label" => "No",
+                    "data" => "no"
+                ]
+            ]
+        ]
+    ];
+}
+
 function makeTemplatePostData($length) {
     return [
         "type" => "template",
@@ -170,7 +193,7 @@ function makeTemplatePostData($length) {
             "type" => "buttons",
             "title" => "Menu",
             "text" => "作る文字列の種類を選んでください",
-            "action" => makeButtonTemplateData($length)
+            // "action" => makeButtonTemplateData($length)
         ]
     ];
 }
