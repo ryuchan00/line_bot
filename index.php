@@ -195,23 +195,23 @@ function makeButtonsPostData($imagePath) {
             "title" => "Menu",
             "text" => "１～４で選んでください",
             "actions" => [
+                // [
+                //     "type" => "postback",
+                //     "label" => "1",
+                //     "text" => "1"
+                // ],
+                // [
+                //     "type" => "postback",
+                //     "label" => "2",
+                //     "text" => "2"
+                // ],
                 [
-                    "type" => "postback",
-                    "label" => "1",
-                    "text" => "1"
-                ],
-                [
-                    "type" => "postback",
-                    "label" => "2",
-                    "text" => "2"
-                ],
-                [
-                    "type" => "postback",
+                    "type" => "message",
                     "label" => "3",
                     "text" => "3"
                 ],
                 [
-                    "type" => "postback",
+                    "type" => "uri",
                     "label" => "4",
                     "uri" => "http://blog.livedoor.jp/itsoku/"
                 ]
