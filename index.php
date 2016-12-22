@@ -1,6 +1,6 @@
 <?php
 
-echo __DIR__ .'/vender/autoload.php';
+echo '/vender/autoload.php';
 require_once __DIR__ .'/vender/autoload.php';
 
 $httpClient = new
