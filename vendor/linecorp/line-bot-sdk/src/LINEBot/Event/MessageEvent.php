@@ -51,14 +51,4 @@ class MessageEvent extends BaseEvent
     {
         return $this->message['id'];
     }
-    
-    /**
-     * Returns the type of the message.
-     *
-     * @return string
-     */
-    public function getMessageType()
-    {
-        return $this->message['type'];
-    }
 }

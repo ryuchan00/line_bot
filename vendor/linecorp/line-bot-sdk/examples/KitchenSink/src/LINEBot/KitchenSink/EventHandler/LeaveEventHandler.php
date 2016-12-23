@@ -46,15 +46,9 @@ class LeaveEventHandler implements EventHandler
 
     public function handle()
     {
-        if ($this->leaveEvent->isGroupEvent()) {
-            $id = $this->leaveEvent->getGroupId();
-        } elseif ($this->leaveEvent->isRoomEvent()) {
-            $id = $this->leaveEvent->getRoomId();
-        } else {
-            $this->logger->error("Unknown event type");
-            return;
-        }
-
-        $this->logger->info(sprintf('Left %s %s', $this->leaveEvent->getType(), $id));
+        $this->bot->replyText(
+            $this->leaveEvent->getReplyToken(),
+            sprintf('Leaved %s %s', $this->leaveEvent->getType(), $this->leaveEvent->getUserId())
+        );
     }
 }
