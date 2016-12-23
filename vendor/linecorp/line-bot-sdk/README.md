@@ -5,18 +5,19 @@ line-bot-sdk-php
 
 SDK of the LINE Messaging API for PHP.
 
-About the LINE Messaging API
+About LINE Messaging API
 --
 
-See the official API documentation for more information.
+Please refer to the official API documents for details.
 
-English: [https://devdocs.line.me/en/](https://devdocs.line.me/en/)<br>
-Japanese: [https://devdocs.line.me/ja/](https://devdocs.line.me/ja/)
+en: [https://devdocs.line.me/en/](https://devdocs.line.me/en/)
+
+ja: [https://devdocs.line.me/ja/](https://devdocs.line.me/ja/)
 
 Installation
 --
 
-Install the LINE Messaging API SDK using [Composer](https://getcomposer.org/).
+The LINE messaging API SDK can be installed with [Composer](https://getcomposer.org/).
 
 ```
 $ composer require linecorp/line-bot-sdk
@@ -27,21 +28,21 @@ Getting started
 
 ### Create the bot client instance
 
-The bot client instance is a handler of the Messaging API.
+Instance of bot client is a handler of the Messaging API.
 
 ```php
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
 ```
 
-The constructor of the bot client requires an instance of `HTTPClient`.
-This library provides `CurlHTTPClient` by default.
+The constructor of bot client requires an instance of `HTTPClient`.
+This library provides `CurlHTTPClient` as default.
 
 ### Call API
 
-You can call an API through the bot client instance.
+You can call API through the bot client instance.
 
-A very simple example:
+Deadly simple sample is following;
 
 ```php
 $response = $bot->replyText('<reply token>', 'hello!');
@@ -49,7 +50,7 @@ $response = $bot->replyText('<reply token>', 'hello!');
 
 This procedure sends a message to the destination that is associated with `<reply token>`.
 
-A more advanced example:
+More advanced sample is below;
 
 ```php
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
@@ -63,24 +64,25 @@ if ($response->isSucceeded()) {
 echo $response->getHTTPStatus . ' ' . $response->getRawBody();
 ```
 
-`LINEBot#replyMessage()` takes the reply token and `MessageBuilder`.
-The method sends a message that is built by `MessageBuilder` to the destination.
+`LINEBot#replyMessage()` takes reply token and `MessageBuilder`.
+This method sends message that is built by `MessageBuilder` to the destination.
 
 Components
 --
 
 ### MessageBuilder
 
-The type of message that is sent depends on the type of instance of `MessageBuilder`.
-For example, the method sends a text message if you pass `TextMessageBuilder` and it sends an image message if you pass `ImaageMessageBuilder`.
+Type of message depends on the type of instance of `MessageBuilder`.
+That means this method sends text message if you pass `TextMessageBuilder`,
+on the other hand it sends image message if you pass `ImaageMessageBuilder`.
 
-For more detailed information on `MessageBuilder`, see `\LINE\LINEBot\MessageBuilder` and the namespace.
+If you want detail information of `MessageBuilder`, please refer `\LINE\LINEBot\MessageBuilder` and the namespace.
 
-Other methods that take `MessageBuilder` behave in the same way.
+Other methods that take `MessageBuilder` behave the same.
 
 ### Response
 
-Methods that call API returns `Response`. Response has three methods;
+Methods that call API returns `Response`.  Response has three methods;
 
 - `Response#isSucceeded()`
 - `Response#getHTTPStatus()`
@@ -89,23 +91,23 @@ Methods that call API returns `Response`. Response has three methods;
 - `Response#getHeader($name)`
 - `Response#getHeaders()`
 
-You can use these methods to check the response status and take response body.
+You can use these method to check response status and take response body.
 
 #### `Response#isSucceeded()`
 
-Returns a Boolean value. The return value represents whether the request succeeded or not.
+This method returns the boolean value. Return value represents "request is succeeded or not".
 
 #### `Response#getHTTPStatus()`
 
-Returns the HTTP status code of a response.
+This method returns the HTTP status code of response.
 
 #### `Response#getRawBody()`
 
-Returns the body of the response as raw data (a byte string).
+This method returns the body of response as raw (i.e. byte string).
 
 #### `Response#getJSONDecodedBody()`
 
-Returns the body that is decoded in JSON. This body is an array.
+This method returns the body that is decoded as JSON. This body is an array.
 
 #### `Response#getHeader($name)`
 
@@ -117,16 +119,16 @@ This method returns all of the response headers as string array.
 
 ### Webhook
 
-LINE's server sends user actions (such as a message, image, or location) to your bot server.
+LINE's server sends user action (message, image, location and etc.) to your bot server.
 Request of that contains event(s); event is action of the user.
 
-The following shows how the webhook is handled:
+Flow of webhook handling is like following;
 
 1. Receive webhook from LINE's server.
 2. Parse request payload by `LINEBot#parseEventRequest($body, $signature)`.
 3. Iterate parsed events and some react as you like.
 
-The following examples show how webhooks are handled:
+We provides examples of this flow:
 
 - [EchoBot: Route.php](/examples/EchoBot/src/LINEBot/EchoBot/Route.php)
 - [KitchenSink: Route.php](/examples/KitchenSink/src/LINEBot/KitchenSink/Route.php)
@@ -134,42 +136,44 @@ The following examples show how webhooks are handled:
 More information
 --
 
-For more information, see the [official API documents](#about-the-line-messaging-api) and PHPDoc.
-If it's your first time using this library, we recommend taking a look at `examples` and the PHPDoc of `\LINE\LINEBot`.
+Please check [official API documents](#about-line-messaging-api) and PHPDoc.
+If you first time to use this library, we recommend to see `examples` and PHPDoc of `\LINE\LINEBot`.
 
 Hints
 --
 
 ### Examples
 
-This repository contains two examples of how to use the LINE Messaging API.
+This repository contains two examples of LINE Messaging API.
 
 #### [EchoBot](/examples/EchoBot)
 
-A simple sample implementation. This application reacts to text messages that are sent from users.
+A simple sample implementation. This application reacts to text message that is from user.
 
 #### [KitchenSink](/examples/KitchenSink)
 
-A full-stack (and slightly complex) sample implementation. This application demonstrates a practical use of the LINE Messaging API.
+A full-stack (and a bit complex) sample implementation. That will show you practical usage of LINE Messaging API.
 
 ### PHPDoc
 
-This library provides PHPDoc to describe how to use the methods. You can generate the documentation using [apigen](http://www.apigen.org/) using the following command.
+This library provides PHPDoc. That will helps you to know usages of methods.
+
+This library can generate pretty documents by [apigen](http://www.apigen.org/). Please try:
 
 ```
 $ make doc
 ```
 
-The HTML files are generated in `docs/`.
+When HTML documents will be put on `docs/`.
 
-### Official API documentation
+### Official API documents
 
-[Official API documents](#about-the-line-messaging-api) shows the detail of  Messaging API and fundamental usage of SDK.
+[Official API documents](#about-line-messaging-api) shows the detail of Messaging API and fundamental usage of SDK.
 
 Notes
 --
 
-### How to switch the HTTP client implementation
+### How to switch HTTP client implementation?
 
 1. Implement `\LINE\LINEBot\HTTPClient`
 2. Pass the implementation to the constructor of `\LINE\LINEBot`
@@ -184,15 +188,29 @@ Requirements
 For SDK developers
 --
 
-Please refer [HACKING.md](/HACKING.md).
+### How to run tests?
 
-See also
+Please use `make test`.
+
+### How to execute [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)?
+
+Please use `make phpcs`.
+
+### How to execute [PHPMD](https://phpmd.org/)?
+
+Please use `make phpmd`.
+
+### How to execute them all??
+
+`make`
+
+See Also
 --
 
 ### [line-bot-sdk-tiny](./line-bot-sdk-tiny)
 
-A very simple SDK (subset) for the LINE Messaging API for PHP.
-line-bot-sdk-tiny provides a simple interface and functions which makes it a good way to learn how to use the LINE Messaging API.
+Deadly simple SDK (subset) of the LINE Messaging API for PHP.
+line-bot-sdk-tiny provides simple interface and functions so it is useful to try and learn the LINE Messaging API.
 
 License
 --
@@ -212,3 +230,4 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 ```
+

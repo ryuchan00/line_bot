@@ -46,18 +46,9 @@ class JoinEventHandler implements EventHandler
 
     public function handle()
     {
-        if ($this->joinEvent->isGroupEvent()) {
-            $id = $this->joinEvent->getGroupId();
-        } elseif ($this->joinEvent->isRoomEvent()) {
-            $id = $this->joinEvent->getRoomId();
-        } else {
-            $this->logger->error("Unknown event type");
-            return;
-        }
-
         $this->bot->replyText(
             $this->joinEvent->getReplyToken(),
-            sprintf('Joined %s %s', $this->joinEvent->getType(), $id)
+            sprintf('Joined %s %s', $this->joinEvent->getType(), $this->joinEvent->getUserId())
         );
     }
 }
