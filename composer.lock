@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5d4550042fc3728d10fa184249d3b1c7",
-    "content-hash": "af01ae4bb8107c5812848c0ddc592f5d",
+    "hash": "5f518dd4df57b308c0b45abfc442364a",
+    "content-hash": "8d1014940b5498729ae38008715bc9a4",
     "packages": [
         {
             "name": "linecorp/line-bot-sdk",
