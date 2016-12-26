@@ -32,8 +32,8 @@ foreach ($events as $event) {
 $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
 $message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょう！";
 
-foreach ($profile as $value) {
-    error_log($value);
+foreach ($profile as $key => $value) {
+    error_log($key .":" .$value);
 }
 
 $bot->replyMessage($event->getReplyToken(),
