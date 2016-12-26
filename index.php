@@ -31,7 +31,11 @@ foreach ($events as $event) {
 // $bot->replyText($event->getReplyToken(), $event->getText());
 $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
 $message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょう！";
-error_log($profile);
+
+foreach ($profile as $value) {
+    error_log($value);
+}
+
 $bot->replyMessage($event->getReplyToken(),
   (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
