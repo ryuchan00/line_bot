@@ -30,20 +30,9 @@ foreach ($events as $event) {
 
 // $bot->replyText($event->getReplyToken(), $event->getText());
 $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-$message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょうね！";
+$message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょう！";
 
 foreach ($profile as $key => $value) {
-    error_log($key .":" .$value);
-}
-
-$url = parse_url(getenv('DATABASE_URL'));
-
-$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
-
-$pdo = new PDO($dsn, $url['user'], $url['pass']);
-$db_info = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
-
-foreach ($db_info as $key => $value) {
     error_log($key .":" .$value);
 }
 
