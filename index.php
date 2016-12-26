@@ -36,6 +36,17 @@ foreach ($profile as $key => $value) {
     error_log($key .":" .$value);
 }
 
+$url = parse_url(getenv('DATABASE_URL'));
+
+$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+
+$pdo = new PDO($dsn, $url['user'], $url['pass']);
+$db_info = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
+
+foreach ($db_info as $key => $value) {
+    error_log($key .":" .$value);
+}
+
 $bot->replyMessage($event->getReplyToken(),
   (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
