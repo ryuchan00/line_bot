@@ -40,6 +40,7 @@ $bot->replyMessage($event->getReplyToken(),
   (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 19))
+    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 20))
 );
 }
 
