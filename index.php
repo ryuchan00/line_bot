@@ -39,7 +39,7 @@ $message = $profile["displayName"] . "さん、おはようございます！今
 $bot->replyMessage($event->getReplyToken(),
   (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
-    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(3, 19))
+    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 19))
 );
 }
 
