@@ -30,16 +30,16 @@ foreach ($events as $event) {
 
 // $bot->replyText($event->getReplyToken(), $event->getText());
 $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-$message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょうね！";
+$message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょう！";
 
-foreach ($profile as $key => $value) {
-    error_log($key .":" .$value);
-}
+//foreach ($profile as $key => $value) {
+//    error_log($key .":" .$value);
+//}
 
 $bot->replyMessage($event->getReplyToken(),
   (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
-    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, 114))
+    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(3, 19))
 );
 }
 
