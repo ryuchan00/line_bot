@@ -42,6 +42,13 @@ $bot->replyMessage($event->getReplyToken(),
     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 19))
     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 20))
 );
+
+// $bot->replyMessage($event->getReplyToken(),
+//   (new \LINE\LINEBot\MessageBuilder\TemplateActionBuilder\())
+//     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
+//     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 19))
+//     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 20))
+);
 }
 
 ?>
