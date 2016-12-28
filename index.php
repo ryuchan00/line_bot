@@ -31,10 +31,21 @@ foreach ($events as $event) {
 // $bot->replyText($event->getReplyToken(), $event->getText());
 $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
 $message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょう！";
+$displayName = $profile["displayName"];
 
-//foreach ($profile as $key => $value) {
-//    error_log($key .":" .$value);
-//}
+$url = parse_url(getenv('DATABASE_URL'));
+$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+$pdo = new PDO($dsn, $url['user'], $url['pass']);
+
+$sql = 'insert into user (name) values (?)';
+$stmt = $pdo->prepare($sql);
+$flag = $stmt->execute(array($displayName));
+
+if ($flag){
+    print('データの追加に成功しました<br>');
+}else{
+    print('データの追加に失敗しました<br>');
+}
 
 $bot->replyMessage($event->getReplyToken(),
   (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
