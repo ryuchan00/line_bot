@@ -42,9 +42,9 @@ $stmt = $pdo->prepare($sql);
 $flag = $stmt->execute(array($displayName));
 
 if ($flag){
-    print('データの追加に成功しました<br>');
+    error_log('データの追加に成功しました');
 }else{
-    print('データの追加に失敗しました<br>');
+    error_log('データの追加に失敗しました');
 }
 
 $bot->replyMessage($event->getReplyToken(),
