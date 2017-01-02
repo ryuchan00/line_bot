@@ -45,11 +45,11 @@ foreach ($profile as $k => $v) {
 //$stmt = $pdo->prepare($sql);
 //$flag = $stmt->execute(array($displayName));
 
-if ($flag){
-    error_log('データの追加に成功しました');
-}else{
-    error_log('データの追加に失敗しました');
-}
+//if ($flag){
+//    error_log('データの追加に成功しました');
+//}else{
+//    error_log('データの追加に失敗しました');
+//}
 
 // 返答するLINEスタンプをランダムで算出
 $stkid = mt_rand(1, 17);
