@@ -33,13 +33,17 @@ $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
 $message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
 $displayName = $profile["displayName"];
 
-$url = parse_url(getenv('DATABASE_URL'));
-$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
-$pdo = new PDO($dsn, $url['user'], $url['pass']);
+foreach ($profile as $k => $v) {
+    error_log($k . ":" . $v);
+}
 
-$sql = 'insert into user (name) values (?)';
-$stmt = $pdo->prepare($sql);
-$flag = $stmt->execute(array($displayName));
+//$url = parse_url(getenv('DATABASE_URL'));
+//$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+//$pdo = new PDO($dsn, $url['user'], $url['pass']);
+//
+//$sql = 'insert into user (name) values (?)';
+//$stmt = $pdo->prepare($sql);
+//$flag = $stmt->execute(array($displayName));
 
 if ($flag){
     error_log('データの追加に成功しました');
