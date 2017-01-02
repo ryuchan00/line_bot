@@ -30,7 +30,7 @@ foreach ($events as $event) {
 
 // $bot->replyText($event->getReplyToken(), $event->getText());
 $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-$message = $profile["displayName"] . "さん、おはようございます！今日も頑張りましょう！";
+$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
 $displayName = $profile["displayName"];
 
 $url = parse_url(getenv('DATABASE_URL'));
@@ -47,11 +47,13 @@ if ($flag){
     error_log('データの追加に失敗しました');
 }
 
+// 返答するLINEスタンプをランダムで算出
+$stkid = mt_rand(1, 17);
+
 $bot->replyMessage($event->getReplyToken(),
   (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
-    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 19))
-    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 20))
+    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
 );
 
 // $bot->replyMessage($event->getReplyToken(),
