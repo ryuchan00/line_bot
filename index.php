@@ -30,7 +30,8 @@ foreach ($events as $event) {
 
 // $bot->replyText($event->getReplyToken(), $event->getText());
 $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
+$message = "http://codezine.jp/article/detail/9905";
+//$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
 $displayName = $profile["displayName"];
 
 foreach ($profile as $k => $v) {
