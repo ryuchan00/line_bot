@@ -63,7 +63,20 @@ foreach ($events as $event) {
 //);
 
 
-    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
+//    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
+    replyButtonsTemplate($bot,
+        $event->getReplyToken(),
+        "お天気お知らせ - 今日は天気予報は晴れです",
+        "https://" . $_SERVER["HTTP_HOST"] . "/imgs/template.jpg",
+        "お天気お知らせ",
+        "今日は天気予報は晴れです",
+        new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+            "明日の天気", "tomorrow"),
+        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
+            "週末の天気", "weekend"),
+        new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
+            "Webで見る", "http://google.jp")
+    );
 
 }
 
@@ -74,12 +87,19 @@ function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUr
     }
 }
 
-// $bot->replyMessage($event->getReplyToken(),
-//   (new \LINE\LINEBot\MessageBuilder\TemplateActionBuilder\())
-//     ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
-//     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 19))
-//     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 20))
-//);
-
+function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $title, $text, ...$actions) {
+    $actionArray = array();
+    foreach($actions as $value) {
+        array_push($actionArray, $value);
+    }
+    $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
+        $alternativeText,
+        new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($title, $text, $imageUrl, $actionArray)
+    );
+    $response = $bot->replyMessage($replyToken, $builder);
+    if (!$response->isSucceeded()) {
+        error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
+    }
+}
 
 ?>
