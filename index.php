@@ -19,24 +19,25 @@ try {
 }
 
 foreach ($events as $event) {
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
-    error_log('Non message event has come');
-    continue;
-  }
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-    error_log('Non text message has come');
-    continue;
-  }
+    if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
+        error_log('Non message event has come');
+        continue;
+    }
+    if (!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
+        error_log('Non text message has come');
+        continue;
+    }
+
 
 // $bot->replyText($event->getReplyToken(), $event->getText());
-$profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-$message = "http://codezine.jp/article/detail/9905";
+    $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
+    $message = "http://codezine.jp/article/detail/9905";
 //$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
-$displayName = $profile["displayName"];
+    $displayName = $profile["displayName"];
 
-foreach ($profile as $k => $v) {
-    error_log($k . ":" . $v);
-}
+    foreach ($profile as $k => $v) {
+        error_log($k . ":" . $v);
+    }
 
 //$url = parse_url(getenv('DATABASE_URL'));
 //$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
@@ -53,7 +54,7 @@ foreach ($profile as $k => $v) {
 //}
 
 // 返答するLINEスタンプをランダムで算出
-$stkid = mt_rand(1, 17);
+    $stkid = mt_rand(1, 17);
 
 //$bot->replyMessage($event->getReplyToken(),
 //  (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
@@ -62,7 +63,9 @@ $stkid = mt_rand(1, 17);
 //);
 
 
-replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
+    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
+
+}
 
 function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUrl) {
     $response = $bot->replyMessage($replyToken, new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($originalImageUrl, $previewImageUrl));
@@ -77,6 +80,6 @@ function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUr
 //     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 19))
 //     ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(2, 20))
 //);
-}
+
 
 ?>
