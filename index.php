@@ -55,11 +55,21 @@ foreach ($profile as $k => $v) {
 // 返答するLINEスタンプをランダムで算出
 $stkid = mt_rand(1, 17);
 
-$bot->replyMessage($event->getReplyToken(),
-  (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
-    ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
-    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
-);
+//$bot->replyMessage($event->getReplyToken(),
+//  (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
+//    ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
+//    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
+//);
+
+
+replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
+
+function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUrl) {
+    $response = $bot->replyMessage($replyToken, new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($originalImageUrl, $previewImageUrl));
+    if (!$response->isSucceeded()) {
+        error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
+    }
+}
 
 // $bot->replyMessage($event->getReplyToken(),
 //   (new \LINE\LINEBot\MessageBuilder\TemplateActionBuilder\())
