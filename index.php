@@ -39,6 +39,12 @@ foreach ($events as $event) {
     $message = "http://codezine.jp/article/detail/9905";
 //$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
     $displayName = $profile["displayName"];
+    $user_info = array(
+        $profile["displayName"],
+        $profile["userId"],
+        $profile["pictureUrl"],
+        $profile["statusMessage"]
+    );
 
     foreach ($profile as $k => $v) {
         error_log($k . ":" . $v);
@@ -48,9 +54,9 @@ $url = parse_url(getenv('DATABASE_URL'));
 $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
 $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
-$sql = 'insert into public.user (name) values (?)';
+$sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?)';
 $stmt = $pdo->prepare($sql);
-$flag = $stmt->execute(array($displayName));
+$flag = $stmt->execute(array($user_info));
 
 //if ($flag){
 //    error_log('データの追加に成功しました');
