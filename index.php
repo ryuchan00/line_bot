@@ -56,6 +56,7 @@ $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
 $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?, ?, ?, ?)';
 $stmt = $pdo->prepare($sql);
+error_log($user_info);
 $flag = $stmt->execute(array($user_info));
 
 //if ($flag){
