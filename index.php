@@ -62,7 +62,7 @@ foreach ($user_info as $k => $v) {
 }
 // $flag = $stmt->execute(array($user_info));
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-$flag = $stmt->execute(array($profile["userId"],$profile["displayName"]));
+$flag = $stmt->execute(array($profile["userId"][0],$profile["displayName"][0]));
 
 //if ($flag){
 //    error_log('データの追加に成功しました');
