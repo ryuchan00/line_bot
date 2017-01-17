@@ -80,9 +80,16 @@ foreach ($events as $event) {
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
             "週末の天気", "weekend"),
         new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
-            "Webで見る", "http://google.jp")
+            "Webで見る", "https://ct2.cservice.jp/res5.3t_demo/twilio_demo2/manage/index.php?mode=re_auth")
     );
 
+}
+
+function replyTextMessage($bot, $replyToken, $text) {
+    $response = $bot->replyMessage($replyToken, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text));
+    if (!$response->isSucceeded()) {
+        error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
+    }
 }
 
 function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUrl) {
