@@ -57,7 +57,7 @@ $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1))
 $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
 // $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?, ?, ?, ?)';
-$sql = 'insert into public.user (user_line_id, name) values (?,?)';
+$sql = 'insert into public.user (public.user_line_id, publick.name) values (?,?)';
 $stmt = $pdo->prepare($sql);
 // foreach ($user_info as $k => $v) {
 //     error_log($k . ":" . $v);
@@ -66,11 +66,11 @@ $stmt = $pdo->prepare($sql);
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
 $flag = $stmt->execute(array($user_id, $displayName));
 
-//if ($flag){
-//    error_log('データの追加に成功しました');
-//}else{
-//    error_log('データの追加に失敗しました');
-//}
+if ($flag){
+   error_log('データの追加に成功しました');
+}else{
+   error_log('データの追加に失敗しました');
+}
 
 // 返答するLINEスタンプをランダムで算出
     $stkid = mt_rand(1, 17);
