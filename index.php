@@ -58,12 +58,12 @@ $pdo = new PDO($dsn, $url['user'], $url['pass']);
 // $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?, ?, ?, ?)';
 $sql = 'insert into public.user (user_line_id, name) values (?,?)';
 $stmt = $pdo->prepare($sql);
-foreach ($user_info as $k => $v) {
-    error_log($k . ":" . $v);
-}
+// foreach ($user_info as $k => $v) {
+//     error_log($k . ":" . $v);
+// }
 // $flag = $stmt->execute(array($user_info));
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-$flag = $stmt->execute(array($user_id,$displayName);
+$flag = $stmt->execute(array('aaa',$displayName);
 
 //if ($flag){
 //    error_log('データの追加に成功しました');
