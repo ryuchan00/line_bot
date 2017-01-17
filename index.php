@@ -64,7 +64,7 @@ $stmt = $pdo->prepare($sql);
 // }
 // $flag = $stmt->execute(array($user_info));
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-$flag = $stmt->execute(array($displayName);
+$flag = $stmt->execute(array($displayName));
 
 //if ($flag){
 //    error_log('データの追加に成功しました');
