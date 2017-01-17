@@ -40,12 +40,13 @@ foreach ($events as $event) {
 //$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
     $user_id = $profile["userId"];
     $displayName = $profile["displayName"];
-    $user_info = array(
-        $profile["displayName"],
-        $profile["userId"],
-        $profile["pictureUrl"],
-        $profile["statusMessage"]
-    );
+    error_log($displayName);
+    // $user_info = array(
+    //     $profile["displayName"],
+    //     $profile["userId"],
+    //     $profile["pictureUrl"],
+    //     $profile["statusMessage"]
+    // );
 
     foreach ($profile as $k => $v) {
         error_log($k . ":" . $v);
