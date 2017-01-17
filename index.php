@@ -54,7 +54,7 @@ $url = parse_url(getenv('DATABASE_URL'));
 $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
 $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
-$sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?)';
+$sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?, ?, ?, ?)';
 $stmt = $pdo->prepare($sql);
 $flag = $stmt->execute(array($user_info));
 
@@ -106,7 +106,7 @@ $flag = $stmt->execute(array($user_info));
         );
         array_push($columnArray, $column);
       }
-  replyCarouselTemplate($bot, $event->getReplyToken(),"今後の天気予報", $columnArray);
+  // replyCarouselTemplate($bot, $event->getReplyToken(),"今後の天気予報", $columnArray);
 
 }
 
