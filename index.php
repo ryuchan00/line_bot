@@ -69,19 +69,38 @@ foreach ($events as $event) {
 
 
 //    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
-    replyButtonsTemplate($bot,
-        $event->getReplyToken(),
-        "お天気お知らせ - 今日は天気予報は晴れです",
-        "https://" . $_SERVER["HTTP_HOST"] . "/imgs/template.jpg",
-        "お天気お知らせ",
-        "今日は天気予報は晴れです",
-        new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-            "明日の天気", "tomorrow"),
-        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-            "週末の天気", "weekend"),
-        new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
-            "Webで見る", "https://ct2.cservice.jp/res5.3t_demo/twilio_demo2/manage/index.php?mode=re_auth")
-    );
+    // replyButtonsTemplate($bot,
+    //     $event->getReplyToken(),
+    //     "お天気お知らせ - 今日は天気予報は晴れです",
+    //     "https://" . $_SERVER["HTTP_HOST"] . "/imgs/template.jpg",
+    //     "お天気お知らせ",
+    //     "今日は天気予報は晴れです",
+    //     new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+    //         "明日の天気", "tomorrow"),
+    //     new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
+    //         "週末の天気", "weekend"),
+    //     new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
+    //         "Webで見る", "https://ct2.cservice.jp/res5.3t_demo/twilio_demo2/manage/index.php?mode=re_auth")
+    // );
+    
+    $columnArray = array();
+    for($i = 0; $i < 5; $i++) {
+        $actionArray = array();
+        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+            "ボタン" . $i . "-" . 1, "c-" . $i . "-" . 1));
+        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+            "ボタン" . $i . "-" . 2, "c-" . $i . "-" . 2));
+        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+            "ボタン" . $i . "-" . 3, "c-" . $i . "-" . 3));
+        $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder (
+            ($i + 1) . "日後の天気",
+            "晴れ",
+            "https://" . $_SERVER["HTTP_HOST"] .  "/imgs/template.jpg",
+            $actionArray
+        );
+        array_push($columnArray, $column);
+      }
+  replyCarouselTemplate($bot, $event->getReplyToken(),"今後の天気予報", $columnArray);
 
 }
 
@@ -113,5 +132,18 @@ function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $t
         error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
     }
 }
+
+function replyCarouselTemplate($bot, $replyToken, $alternativeText, $columnArray) {
+    $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
+        $alternativeText,
+        new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder (
+            $columnArray)
+    );
+    $response = $bot->replyMessage($replyToken, $builder);
+    if (!$response->isSucceeded()) {
+        error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
+    }
+}
+
 
 ?>
