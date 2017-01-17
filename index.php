@@ -44,13 +44,13 @@ foreach ($events as $event) {
         error_log($k . ":" . $v);
     }
 
-//$url = parse_url(getenv('DATABASE_URL'));
-//$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
-//$pdo = new PDO($dsn, $url['user'], $url['pass']);
-//
-//$sql = 'insert into user (name) values (?)';
-//$stmt = $pdo->prepare($sql);
-//$flag = $stmt->execute(array($displayName));
+$url = parse_url(getenv('DATABASE_URL'));
+$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+$pdo = new PDO($dsn, $url['user'], $url['pass']);
+
+$sql = 'insert into public.user (name) values (?)';
+$stmt = $pdo->prepare($sql);
+$flag = $stmt->execute(array($displayName));
 
 //if ($flag){
 //    error_log('データの追加に成功しました');
