@@ -38,6 +38,7 @@ foreach ($events as $event) {
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
     $message = "http://codezine.jp/article/detail/9905";
 //$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
+    $user_id = $profile["userId"];
     $displayName = $profile["displayName"];
     $user_info = array(
         $profile["displayName"],
@@ -62,7 +63,7 @@ foreach ($user_info as $k => $v) {
 }
 // $flag = $stmt->execute(array($user_info));
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-$flag = $stmt->execute(array($profile["userId"][0],$profile["displayName"][0]));
+$flag = $stmt->execute(array($user_id,$displayName);
 
 //if ($flag){
 //    error_log('データの追加に成功しました');
