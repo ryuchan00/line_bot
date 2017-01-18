@@ -38,9 +38,9 @@ foreach ($events as $event) {
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
     $message = "http://codezine.jp/article/detail/9905";
 //$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
-    $user_id = $profile["userId"];
-    $displayName = $profile["displayName"];
-    error_log($displayName);
+//    $user_id = $profile["userId"];
+//    $displayName = $profile["displayName"];
+//    error_log($displayName);
     // $user_info = array(
     //     $profile["displayName"],
     //     $profile["userId"],
@@ -64,8 +64,6 @@ $stmt = $pdo->prepare($sql);
 // }
 // $flag = $stmt->execute(array($user_info));
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-error_log('user_id' .$user_id);
-error_log('displayName' .$displayName);
 $stmt->bindValue(":user_line_id", $profile["userId"]);
 $stmt->bindValue(":name", $profile["displayName"]);
 $stmt->bindValue(":comment", $profile["statusMessage"]);
@@ -88,7 +86,7 @@ if ($flag){
 //    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
 //);
 
-
+//
 //    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
      replyButtonsTemplate($bot,
          $event->getReplyToken(),
