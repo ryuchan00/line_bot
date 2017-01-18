@@ -66,8 +66,8 @@ $stmt = $pdo->prepare($sql);
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
 error_log('user_id' .$user_id);
 error_log('displayName' .$displayName);
-$stmt->bindValue(':user_line_id', $user_id);
-$stmt->bindValue(':name', $displayName);
+$stmt->bindValue(":user_line_id", $user_id);
+$stmt->bindValue(":name", $displayName);
 $flag = $stmt->execute();
 // $flag = $stmt->execute(array($user_id, $displayName));
 
