@@ -57,14 +57,17 @@ $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1))
 $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
 // $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?, ?, ?, ?)';
-$sql = 'insert into public.user (public.user_line_id, publick.name) values (?,?)';
+$sql = 'insert into public.user (user_line_id, name) values (:user_line_id, :name)';
 $stmt = $pdo->prepare($sql);
 // foreach ($user_info as $k => $v) {
 //     error_log($k . ":" . $v);
 // }
 // $flag = $stmt->execute(array($user_info));
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-$flag = $stmt->execute(array($user_id, $displayName));
+$stmt->bindValue(':user_line_id', $user_id);
+$stmt->bindValue(':name', $displayName);
+$flag = $stmt->execute();
+// $flag = $stmt->execute(array($user_id, $displayName));
 
 if ($flag){
    error_log('データの追加に成功しました');
