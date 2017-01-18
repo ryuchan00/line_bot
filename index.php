@@ -56,8 +56,8 @@ $url = parse_url(getenv('DATABASE_URL'));
 $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
 $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
-// $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (?, ?, ?, ?)';
-$sql = "insert into public.user (user_line_id, name) values (:user_line_id, :name)";
+$sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (:user_line_id, :name, :comment, :picture_url)';
+// $sql = "insert into public.user (user_line_id, name) values (:user_line_id, :name)";
 $stmt = $pdo->prepare($sql);
 // foreach ($user_info as $k => $v) {
 //     error_log($k . ":" . $v);
@@ -66,8 +66,10 @@ $stmt = $pdo->prepare($sql);
 // $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
 error_log('user_id' .$user_id);
 error_log('displayName' .$displayName);
-$stmt->bindValue(":user_line_id", $user_id);
-$stmt->bindValue(":name", $displayName);
+$stmt->bindValue(":user_line_id", $profile["userId"]);
+$stmt->bindValue(":name", $profile["displayName"]);
+$stmt->bindValue(":comment", $profile["statusMessage"]);
+$stmt->bindValue(":picture_url", $profile["pictureUrl"]);
 $flag = $stmt->execute();
 // $flag = $stmt->execute(array($user_id, $displayName));
 
