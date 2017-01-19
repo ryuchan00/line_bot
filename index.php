@@ -138,7 +138,7 @@ function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $t
     foreach($actions as $value) {
         array_push($actionArray, $value);
     }
-    $builder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder()
+    $builder = (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
         ->add(new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
             $alternativeText,
             new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($title, $text, $imageUrl, $actionArray)))
