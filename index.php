@@ -110,7 +110,7 @@ $flag = $stmt->execute();
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
             "3", "1_3"),
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-            "4", "1_4"),
+            "4", "1_4")
      );
 
 //    $columnArray = array();
