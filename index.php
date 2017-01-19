@@ -51,6 +51,7 @@ foreach ($events as $event) {
     foreach ($profile as $k => $v) {
         error_log($k . ":" . $v);
     }
+    error_log("update");
 
 $url = parse_url(getenv('DATABASE_URL'));
 $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
