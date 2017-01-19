@@ -34,10 +34,10 @@ foreach ($events as $event) {
     }
 
 
-$bot->replyText($event->getReplyToken(), $event->getText());
+    $bot->replyText($event->getReplyToken(), $event->getText());
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
-$message2 = "http://codezine.jp/article/detail/9905";
+    $message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
+    $message2 = "http://codezine.jp/article/detail/9905";
 //    $user_id = $profile["userId"];
 //    $displayName = $profile["displayName"];
 //    error_log($displayName);
