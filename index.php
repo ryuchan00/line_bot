@@ -141,7 +141,6 @@ function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $t
     $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
         $alternativeText,
         new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($title, $text, $imageUrl, $actionArray)
-        new \LINE\LINEBot\MessageBuilder\TemplateBuilder\TextMessageBuilder("http://codezine.jp/article/detail/9905")
     );
     $response = $bot->replyMessage($replyToken, $builder);
     if (!$response->isSucceeded()) {
