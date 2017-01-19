@@ -93,7 +93,12 @@ $flag = $stmt->execute();
             case "1_2":
             case "1_3":
             case "1_4":
-                replyTextMessage($bot, $event->getReplyToken(), "不正解");
+                // replyTextMessage($bot, $event->getReplyToken(), "不正解");
+                $bot->replyMessage($event->getReplyToken(),
+                (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
+                    ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("不正解、キングダム全巻を買って復習しよう！"))
+                    ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("https://www.amazon.co.jp/dp/B002DE793M/"))
+                );
         }
         continue;
     }
