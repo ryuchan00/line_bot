@@ -33,8 +33,6 @@ foreach ($events as $event) {
         continue;
     }
 
-
-    $bot->replyText($event->getReplyToken(), $event->getText());
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
     $message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
     $message2 = "http://codezine.jp/article/detail/9905";
@@ -59,9 +57,6 @@ $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
 $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (:user_line_id, :name, :comment, :picture_url)';
 $stmt = $pdo->prepare($sql);
-// foreach ($user_info as $k => $v) {
-//     error_log($k . ":" . $v);
-// }
 $stmt->bindValue(":user_line_id", $profile["userId"]);
 $stmt->bindValue(":name", $profile["displayName"]);
 $stmt->bindValue(":comment", $profile["statusMessage"]);
