@@ -138,11 +138,17 @@ function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $t
     foreach($actions as $value) {
         array_push($actionArray, $value);
     }
-    $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
-        $alternativeText,
-        new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($title, $text, $imageUrl, $actionArray)
-        new \LINE\LINEBot\MessageBuilder\TemplateBuilder\TextMessageBuilder("http://codezine.jp/article/detail/9905")
+    $builder = (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
+        ->add(new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
+            $alternativeText,
+            new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($title, $text, $imageUrl, $actionArray)))
+        ->add(new \LINE\LINEBot\MessageBuilder\TemplateBuilder\TextMessageBuilder("http://codezine.jp/article/detail/9905"))
     );
+    // $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
+    //     $alternativeText,
+    //     new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($title, $text, $imageUrl, $actionArray)
+    //     new \LINE\LINEBot\MessageBuilder\TemplateBuilder\TextMessageBuilder("http://codezine.jp/article/detail/9905")
+    // );
     $response = $bot->replyMessage($replyToken, $builder);
     if (!$response->isSucceeded()) {
         error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
