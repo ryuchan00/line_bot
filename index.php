@@ -36,8 +36,8 @@ foreach ($events as $event) {
 
 $bot->replyText($event->getReplyToken(), $event->getText());
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-    $message = "http://codezine.jp/article/detail/9905";
 $message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
+$message2 = "http://codezine.jp/article/detail/9905";
 //    $user_id = $profile["userId"];
 //    $displayName = $profile["displayName"];
 //    error_log($displayName);
@@ -79,6 +79,7 @@ $flag = $stmt->execute();
     $bot->replyMessage($event->getReplyToken(),
      (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
        ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
+       ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message2))
        ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
     );
 
