@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+$postback = false;
+
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
@@ -20,8 +22,9 @@ try {
 
 foreach ($events as $event) {
     if ($event instanceof \LINE\LINEBot\Event\PostbackEvent) {
-        replyTextMessage($bot, $event->getReplyToken(), "Postback受信「" . $event->getPostbackData() . "」");
-        continue;
+        // replyTextMessage($bot, $event->getReplyToken(), "Postback受信「" . $event->getPostbackData() . "」");
+        $postback = true;
+        $pbMsg = $event->getPostbackData();
     }
 
     if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
@@ -70,7 +73,7 @@ $flag = $stmt->execute();
 // }
 
 // 返答するLINEスタンプをランダムで算出
-    $stkid = mt_rand(1, 17);
+    // $stkid = mt_rand(1, 17);
 
     // $bot->replyMessage($event->getReplyToken(),
     //  (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
@@ -82,20 +85,32 @@ $flag = $stmt->execute();
     // replyTextMessage($bot, $event->getReplyToken(), "TextMessage");
 //
 //    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
-
-
+    
+    if ($postback) {
+        switch ($pbMsg) {
+            case "1_1":
+                replyTextMessage($bot, $event->getReplyToken(), "正解");
+            case "1_2":
+            case "1_3":
+            case "1_4":
+                replyTextMessage($bot, $event->getReplyToken(), "不正解");
+        }
+        continue;
+    }
+    
      replyButtonsTemplate($bot,
         $event->getReplyToken(),
-        "お天気お知らせ - 今日は天気予報は晴れです",
-        "https://" . $_SERVER["HTTP_HOST"] . "/imgs/template.jpg",
-        "お天気お知らせ",
-        "今日は天気予報は晴れです",
-        new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-            "明日の天気", "tomorrow"),
+        "キングダム クイズ",
+        "https://" . $_SERVER["HTTP_HOST"] . "/imgs/1.jpg",
+        "秦の怪鳥の異名を持つ六大将軍といえば？",
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-            "週末の天気", "weekend"),
-        new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
-            "Webで見る", "https://ct2.cservice.jp/res5.3t_demo/twilio_demo2/manage/index.php?mode=re_auth")
+            "1", "1_1"),
+        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
+            "2", "1_2"),
+        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
+            "3", "1_3"),
+        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
+            "4", "1_4"),
      );
 
 //    $columnArray = array();
