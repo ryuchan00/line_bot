@@ -105,13 +105,13 @@ $flag = $stmt->execute();
         "問題",
         "秦の怪鳥の異名を持つ六大将軍といえば？",
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-            "1", "1_1"),
+            "王騎", "1_1"),
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-            "2", "1_2"),
+            "羌瘣", "1_2"),
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-            "3", "1_3"),
+            "嬴政", "1_3"),
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-            "4", "1_4")
+            "信", "1_4")
      );
 
 //    $columnArray = array();
