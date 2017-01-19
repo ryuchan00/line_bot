@@ -62,23 +62,20 @@ $stmt = $pdo->prepare($sql);
 // foreach ($user_info as $k => $v) {
 //     error_log($k . ":" . $v);
 // }
-// $flag = $stmt->execute(array($user_info));
-// $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-$stmt->bindValue(":user_line_id", $profile["userId"]);
-$stmt->bindValue(":name", $profile["displayName"]);
-$stmt->bindValue(":comment", $profile["statusMessage"]);
-$stmt->bindValue(":picture_url", $profile["pictureUrl"]);
-$flag = $stmt->execute();
-// $flag = $stmt->execute(array($user_id, $displayName));
-
-if ($flag){
-   error_log('データの追加に成功しました');
-}else{
-   error_log('データの追加に失敗しました');
-}
+// $stmt->bindValue(":user_line_id", $profile["userId"]);
+// $stmt->bindValue(":name", $profile["displayName"]);
+// $stmt->bindValue(":comment", $profile["statusMessage"]);
+// $stmt->bindValue(":picture_url", $profile["pictureUrl"]);
+// $flag = $stmt->execute();
+// 
+// if ($flag){
+//    error_log('データの追加に成功しました');
+// }else{
+//    error_log('データの追加に失敗しました');
+// }
 
 // 返答するLINEスタンプをランダムで算出
-    $stkid = mt_rand(1, 17);
+    // $stkid = mt_rand(1, 17);
 
 //$bot->replyMessage($event->getReplyToken(),
 //  (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
@@ -137,7 +134,7 @@ function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUr
     }
 }
 
-function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $title, $text, ...$actions) {
+function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $title, $text, $actions) {
     $actionArray = array();
     foreach($actions as $value) {
         array_push($actionArray, $value);
