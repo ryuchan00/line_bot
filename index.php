@@ -23,7 +23,7 @@ foreach ($events as $event) {
         replyTextMessage($bot, $event->getReplyToken(), "Postback受信「" . $event->getPostbackData() . "」");
         continue;
     }
-    
+
     if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
         error_log('Non message event has come');
         continue;
@@ -34,13 +34,13 @@ foreach ($events as $event) {
     }
 
 
-// $bot->replyText($event->getReplyToken(), $event->getText());
+$bot->replyText($event->getReplyToken(), $event->getText());
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
     $message = "http://codezine.jp/article/detail/9905";
-//$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
-    $user_id = $profile["userId"];
-    $displayName = $profile["displayName"];
-    error_log($displayName);
+$message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
+//    $user_id = $profile["userId"];
+//    $displayName = $profile["displayName"];
+//    error_log($displayName);
     // $user_info = array(
     //     $profile["displayName"],
     //     $profile["userId"],
@@ -57,40 +57,37 @@ $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1))
 $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
 $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (:user_line_id, :name, :comment, :picture_url)';
-// $sql = "insert into public.user (user_line_id, name) values (:user_line_id, :name)";
 $stmt = $pdo->prepare($sql);
 // foreach ($user_info as $k => $v) {
 //     error_log($k . ":" . $v);
 // }
-// $flag = $stmt->execute(array($user_info));
-// $flag = $stmt->execute(array($profile["displayName"],$profile["userId"],$profile["pictureUrl"],$profile["statusMessage"]));
-error_log('user_id' .$user_id);
-error_log('displayName' .$displayName);
 $stmt->bindValue(":user_line_id", $profile["userId"]);
 $stmt->bindValue(":name", $profile["displayName"]);
 $stmt->bindValue(":comment", $profile["statusMessage"]);
 $stmt->bindValue(":picture_url", $profile["pictureUrl"]);
 $flag = $stmt->execute();
-// $flag = $stmt->execute(array($user_id, $displayName));
-
-if ($flag){
-   error_log('データの追加に成功しました');
-}else{
-   error_log('データの追加に失敗しました');
-}
+// 
+// if ($flag){
+//    error_log('データの追加に成功しました');
+// }else{
+//    error_log('データの追加に失敗しました');
+// }
 
 // 返答するLINEスタンプをランダムで算出
     $stkid = mt_rand(1, 17);
 
-//$bot->replyMessage($event->getReplyToken(),
-//  (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
-//    ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
-//    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
-//);
+    $bot->replyMessage($event->getReplyToken(),
+     (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
+       ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
+       ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
+    );
 
-
+    // replyTextMessage($bot, $event->getReplyToken(), "TextMessage");
+//
 //    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
-    // replyButtonsTemplate($bot,
+
+
+    //  replyButtonsTemplate($bot,
     //     $event->getReplyToken(),
     //     "お天気お知らせ - 今日は天気予報は晴れです",
     //     "https://" . $_SERVER["HTTP_HOST"] . "/imgs/template.jpg",
@@ -102,25 +99,25 @@ if ($flag){
     //         "週末の天気", "weekend"),
     //     new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
     //         "Webで見る", "https://ct2.cservice.jp/res5.3t_demo/twilio_demo2/manage/index.php?mode=re_auth")
-    // );
-    
-    $columnArray = array();
-    for($i = 0; $i < 5; $i++) {
-        $actionArray = array();
-        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-            "ボタン" . $i . "-" . 1, "c-" . $i . "-" . 1));
-        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-            "ボタン" . $i . "-" . 2, "c-" . $i . "-" . 2));
-        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-            "ボタン" . $i . "-" . 3, "c-" . $i . "-" . 3));
-        $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder (
-            ($i + 1) . "日後の天気",
-            "晴れ",
-            "https://" . $_SERVER["HTTP_HOST"] .  "/imgs/template.jpg",
-            $actionArray
-        );
-        array_push($columnArray, $column);
-      }
+    //  );
+
+//    $columnArray = array();
+//    for($i = 0; $i < 5; $i++) {
+//        $actionArray = array();
+//        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+//            "ボタン" . $i . "-" . 1, "c-" . $i . "-" . 1));
+//        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+//            "ボタン" . $i . "-" . 2, "c-" . $i . "-" . 2));
+//        array_push($actionArray, new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+//            "ボタン" . $i . "-" . 3, "c-" . $i . "-" . 3));
+//        $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder (
+//            ($i + 1) . "日後の天気",
+//            "晴れ",
+//            "https://" . $_SERVER["HTTP_HOST"] .  "/imgs/template.jpg",
+//            $actionArray
+//        );
+//        array_push($columnArray, $column);
+//      }
   // replyCarouselTemplate($bot, $event->getReplyToken(),"今後の天気予報", $columnArray);
 
 }
@@ -139,7 +136,7 @@ function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUr
     }
 }
 
-function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $title, $text, ...$actions) {
+function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $title, $text, $actions) {
     $actionArray = array();
     foreach($actions as $value) {
         array_push($actionArray, $value);
