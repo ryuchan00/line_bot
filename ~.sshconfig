@@ -1,7 +1,0 @@
-Host github-mine
-  HostName github.com
-    User git
-      Port 22
-        TCPKeepAlive yes
-	  IdentitiesOnly yes
-	    IdentityFile ~/.ssh/id_rsa
