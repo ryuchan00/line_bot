@@ -102,6 +102,7 @@ $flag = $stmt->execute();
         $event->getReplyToken(),
         "キングダム クイズ",
         "https://" . $_SERVER["HTTP_HOST"] . "/imgs/1.jpg",
+        "問題",
         "秦の怪鳥の異名を持つ六大将軍といえば？",
         new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
             "1", "1_1"),
