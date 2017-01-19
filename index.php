@@ -34,7 +34,7 @@ foreach ($events as $event) {
     }
 
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
-    $message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
+    // $message = $profile["displayName"] . "さん、ランダムでスタンプで返答します。";
     $message2 = "http://codezine.jp/article/detail/9905";
 //    $user_id = $profile["userId"];
 //    $displayName = $profile["displayName"];
@@ -72,31 +72,31 @@ $flag = $stmt->execute();
 // 返答するLINEスタンプをランダムで算出
     $stkid = mt_rand(1, 17);
 
-    $bot->replyMessage($event->getReplyToken(),
-     (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
-       ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
-       ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message2))
-       ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
-    );
+    // $bot->replyMessage($event->getReplyToken(),
+    //  (new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder())
+    //    ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message))
+    //    ->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message2))
+    //    ->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1, $stkid))
+    // );
 
     // replyTextMessage($bot, $event->getReplyToken(), "TextMessage");
 //
 //    replyImageMessage($bot, $event->getReplyToken(), "https://" . $_SERVER["HTTP_HOST"] . "/imgs/original.jpg", "https://" . $_SERVER["HTTP_HOST"] . "/imgs/preview.jpg");
 
 
-    //  replyButtonsTemplate($bot,
-    //     $event->getReplyToken(),
-    //     "お天気お知らせ - 今日は天気予報は晴れです",
-    //     "https://" . $_SERVER["HTTP_HOST"] . "/imgs/template.jpg",
-    //     "お天気お知らせ",
-    //     "今日は天気予報は晴れです",
-    //     new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-    //         "明日の天気", "tomorrow"),
-    //     new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
-    //         "週末の天気", "weekend"),
-    //     new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
-    //         "Webで見る", "https://ct2.cservice.jp/res5.3t_demo/twilio_demo2/manage/index.php?mode=re_auth")
-    //  );
+     replyButtonsTemplate($bot,
+        $event->getReplyToken(),
+        "お天気お知らせ - 今日は天気予報は晴れです",
+        "https://" . $_SERVER["HTTP_HOST"] . "/imgs/template.jpg",
+        "お天気お知らせ",
+        "今日は天気予報は晴れです",
+        new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+            "明日の天気", "tomorrow"),
+        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder (
+            "週末の天気", "weekend"),
+        new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
+            "Webで見る", "https://ct2.cservice.jp/res5.3t_demo/twilio_demo2/manage/index.php?mode=re_auth")
+     );
 
 //    $columnArray = array();
 //    for($i = 0; $i < 5; $i++) {
@@ -141,6 +141,7 @@ function replyButtonsTemplate($bot, $replyToken, $alternativeText, $imageUrl, $t
     $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(
         $alternativeText,
         new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($title, $text, $imageUrl, $actionArray)
+        new \LINE\LINEBot\MessageBuilder\TemplateBuilder\TextMessageBuilder("http://codezine.jp/article/detail/9905")
     );
     $response = $bot->replyMessage($replyToken, $builder);
     if (!$response->isSucceeded()) {
