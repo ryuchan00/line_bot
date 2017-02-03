@@ -28,16 +28,6 @@ foreach ($events as $event) {
         $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
         $pdo = new PDO($dsn, $url['user'], $url['pass']);
 
-        replyConfirmTemplate($bot,
-            $event->getReplyToken(),
-            "Webで詳しく見ますか？",
-            "Webで詳しく見ますか？",
-            new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
-                "見る", "http://google.jp"),
-            new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-                "見ない", "ignore")
-        );
-
         $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (:user_line_id, :name, :comment, :picture_url)';
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":user_line_id", $profile["userId"]);
@@ -47,17 +37,15 @@ foreach ($events as $event) {
         $flag = $stmt->execute();
 
 
-//        replyConfirmTemplate($bot,
-//            $event->getReplyToken(),
-//            "友達追加",
-//            "Webで詳しく見ますか？",
-//            new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
-//                "WebReseach", "https://" . $_SERVER["HTTP_HOST"] . "/get.php?NAME=" . $profile["displayName"] . "&PIC=" . $profile["pictureUrl"]),
-//            new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-//                "見ない", "ignore"),
-//            new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-//                "非表示", "never")
-//        );
+        replyConfirmTemplate($bot,
+            $event->getReplyToken(),
+            "友達追加",
+            "Webで詳しく見ますか？",
+            new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
+                "WebReseach", "https://" . $_SERVER["HTTP_HOST"] . "/get.php?NAME=" . $profile["displayName"] . "&PIC=" . $profile["pictureUrl"]),
+            new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
+                "見ない", "ignore")
+        );
     }
 
     if ($event instanceof \LINE\LINEBot\Event\UnfollowEvent) {
