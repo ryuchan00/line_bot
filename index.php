@@ -42,7 +42,7 @@ foreach ($events as $event) {
             "友達追加",
             "Webで詳しく見ますか？",
             new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
-                "WebReseach", "https://" . $_SERVER["HTTP_HOST"] . "/get.php?NAME=" . $profile["displayName"] . "&PIC=" . $profile["pictureUrl"]),
+                "WebReseach", "https://" . $_SERVER["HTTP_HOST"] . "/get.php?USERID=" . $profile["userId"] . "&PIC=" . $profile["pictureUrl"]),
             new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
                 "見ない", "ignore")
         );
