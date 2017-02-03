@@ -22,6 +22,8 @@ foreach ($events as $event) {
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
     if ($event instanceof \LINE\LINEBot\Event\FollowEvent) {
         error_log("友達追加");
+        error_log($event->getReplyToken());
+
         $url = parse_url(getenv('DATABASE_URL'));
         $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
         $pdo = new PDO($dsn, $url['user'], $url['pass']);
@@ -33,9 +35,7 @@ foreach ($events as $event) {
             new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder (
                 "見る", "http://google.jp"),
             new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-                "見ない", "ignore"),
-            new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder (
-                "非表示", "never")
+                "見ない", "ignore")
         );
 
         $sql = 'insert into public.user (user_line_id, name, comment, picture_url) values (:user_line_id, :name, :comment, :picture_url)';
