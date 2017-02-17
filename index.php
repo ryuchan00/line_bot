@@ -21,7 +21,8 @@ try {
 foreach ($events as $event) {
     $profile = $bot->getProfile($event->getUserId())->getJSONDecodedBody();
     if (($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent)) {
-        error_log($event->getHwid());
+//        error_log($event->getHwid());
+        error_log('ビーコン');
         replyTextMessage($bot, $event->getReplyToken(), 'ビーコンイベント発火');
         exit;
     }
